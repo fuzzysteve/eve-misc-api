@@ -43,7 +43,8 @@ if (array_key_exists('typename', $_GET)) {
 
         if (is_numeric($itemid)) {
             if ($format == 'xml') {
-                    echo "<row typeName=\"".$itemname."\" typeID=\"".$itemid."\" />";
+                    $xmlitemname=htmlspecialchars($itemname, ENT_QUOTES | ENT_XML1, 'UTF-8');
+                    echo "<row typeName=\"".$xmlitemname."\" typeID=\"".$itemid."\" />";
             }
             
 

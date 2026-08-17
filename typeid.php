@@ -38,19 +38,19 @@ if (array_key_exists('format', $_GET)) {
 if (is_numeric($itemid)) {
 
     if ($format == 'xml') {
+        $xmlitemname=htmlspecialchars($itemname, ENT_QUOTES | ENT_XML1, 'UTF-8');
         echo "<?xml version='1.0' encoding='UTF-8'?>
 <eveapi version=\"2\">
 <result>
 <rowset name=\"typeids\" key=\"typeID\" columns=\"typeName,TypeID\">
-<row typeName=\"".$itemname."\" typeID=\"".$itemid."\" />
+<row typeName=\"".$xmlitemname."\" typeID=\"".$itemid."\" />
 </rowset>
 </result>
 </eveapi>";
     }
 
     if ($format == 'json') {
-        $newitemname=preg_replace('/"/', '\\"', $itemname);
-        echo '{"typeID": '.$itemid.',"typeName": "'.$newitemname.'"}';
+        echo json_encode(array("typeID"=>(int)$itemid,"typeName"=>$itemname));
     }
 
 
