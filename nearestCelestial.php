@@ -2,8 +2,9 @@
 
 require_once('db.inc.php');
 
-$sql="select (pow(:x-x,2)+pow(:y-y,2)+pow(:z-z,2)) distance,itemName,itemID,typeID 
-      from mapDenormalize 
+$sql="select (pow(:x-x,2)+pow(:y-y,2)+pow(:z-z,2)) distance,coalesce(mapDenormalize.itemName,invNames.itemname) itemName,mapDenormalize.itemID ,typeID 
+      from mapDenormalize
+      join invNames on mapDenormalize.itemid=invNames.itemid
       where solarsystemid=:solarsystemid
       order by distance asc 
       limit 1";
